@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% for tour in tours %}
+    <div class="card" style="width: 18rem;">
+    <img src="{{ tour.img_url }}" class="card-img-top">
+        <div class="card-body">
+            <h5 class="card-title">{{ tour }}</h5>
+            <p class="card-text">тривалість: {{ tour.duration }}</p>
+            <p class="card-text">Ціна: {{ tour.price }}</p>
+            <p class="card-text">Зарезервований: {% if tour.is_reserved %} Так {% else %} Ні {% endif %}</p>
+            <a href="{{ url_for('tours.edit_tours', id=tour.id) }}" class="btn btn-primary">Редагувати тур</a>
+            <a href="{{ url_for('tours.delete_tour', id=tour.id) }}" class="btn btn-danger">Видалити тур</a>
+        </div>
+    </div>
+{% endfor %}
+{% endblock content %}

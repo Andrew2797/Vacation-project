@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block center %}
+<form action="{{ url_for('tours.edit_tour', id=tour.id) }}" method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">маршрут туру</label>
+        <input type="number" class="form-control" name="tour itinerary" value="{{ request.form.get('tour itinerary') or tour.tour itinerary }}">
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">тривалість</label>
+        <input type="number" class="form-control" name="duration" value="{{ request.form.get('floor') or tour.duration }}">
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">ціна за тур</label>
+        <input type="number" class="form-control" name="price" value="{{ request.form.get('price') or tour.price }}">
+    </div>
+    <div class="form-check form-switch">
+    <input class="form-check-input" type="checkbox" role="switch" name="is_reserves" {% if room.is_reserved %} checked {% endif %}>
+    <label class="form-check-label" for="flexSwitchCheckChecked">зарезервований</label>
+    </div>
+    <div class="mb-3">
+        <img src="{{ tour.img_url }}" class="d-block w-100">
+        <label for="exampleFormControlInput1" class="form-label">виберіть зображення туру</label>
+        <input type="file" class="form-control" name="photo">
+    </div>
+    <button class="btn btn-success" type="submit">Змінити тур</button>
+</form>
+{% endblock center %}

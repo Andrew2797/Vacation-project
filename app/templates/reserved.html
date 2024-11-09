@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block center %}
+<h1>Вітаємо! Ви успішно забронювали тур</h1>
+<div class="card" style="width: 18rem;">
+  <img src="{{ tour.img_url }}" class="card-img-top">
+  <div class="card-body">
+    <h5 class="card-title">{{ tour }}</h5>
+    <p class="card-text">Тривалість: {{ tour.duration }}</p>
+    <p class="card-text">Ціна: {{ tour.price }}</p>
+    <a href="{{ url_for('tours.index') }}" class="btn btn-primary">Повернутись на головну сторінку</a>
+  </div>
+</div>
+{% endblock center %}
