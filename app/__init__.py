@@ -1,11 +1,11 @@
 from flask import Flask
 
 from app.db import create_db
-from app.routes.tour import room_blueprint
+from app.routes.tour import tour_blueprint
 
 
 app = Flask(__name__)
-app.register_blueprint(room_blueprint)
+app.register_blueprint(tour_blueprint)
 
 
 def main():
