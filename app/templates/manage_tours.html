@@ -9,7 +9,7 @@
             <p class="card-text">тривалість: {{ tour.duration }}</p>
             <p class="card-text">Ціна: {{ tour.price }}</p>
             <p class="card-text">Зарезервований: {% if tour.is_reserved %} Так {% else %} Ні {% endif %}</p>
-            <a href="{{ url_for('tours.edit_tours', id=tour.id) }}" class="btn btn-primary">Редагувати тур</a>
+            <a href="{{ url_for('tours.edit_tour', id=tour.id) }}" class="btn btn-primary">Редагувати тур</a>
             <a href="{{ url_for('tours.delete_tour', id=tour.id) }}" class="btn btn-danger">Видалити тур</a>
         </div>
     </div>

@@ -59,40 +59,42 @@ def manage_tours():
 @tour_blueprint.get("/delete/<int:id>/")
 def delete_tour(id):
     with Session() as session:
-        tour = session.query(tour).filter_by(id=id).first()
-        session.delete(tour)
-        session.commit()
-        return redirect(url_for("tour.manage_tours"))
+        tour_instance = session.query(Tour).filter_by(id=id).first()
+        if tour_instance:
+            session.delete(tour_instance)
+            session.commit()
+        return redirect(url_for("tours.manage_tours"))
 
 
 @tour_blueprint.route("/edit_tour/<int:id>/", methods=["GET", "POST"])
 def edit_tour(id):
     with Session() as session:
-        tour = session.query(tour).filter_by(id=id).first()
+        tour_instance = session.query(Tour).filter_by(id=id).first()
 
-        if request.method == "POST":
-            tour.itinerary = request.form.get("itinerary")
-            tour.duration = request.form.get("duration")
-            tour.price = request.form.get("price")
-            tour.is_reserved = True if request.form.get("is_reserved") else False
+        if request.method == "POST" and tour_instance:
+            tour_instance.itinerary = request.form.get("itinerary")
+            tour_instance.duration = request.form.get("duration")
+            tour_instance.price = request.form.get("price")
+            tour_instance.is_reserved = True if request.form.get("is_reserved") else False
 
             photo = request.files.get("photo")
             if photo and photo.filename:
-                tour.img_name_orig = photo.filename
-                tour.img_name = uuid4().hex + "." + photo.filename.split(".")[-1]
-                tour.img_url = "/static/img/" + tour.img_name
-                photo.save("/app" + tour.img_url)
+                tour_instance.img_name_orig = photo.filename
+                tour_instance.img_name = uuid4().hex + "." + photo.filename.split(".")[-1]
+                tour_instance.img_url = "/static/img/" + tour_instance.img_name
+                photo.save("app" + tour_instance.img_url)
 
             session.commit()
             return redirect(url_for("tours.manage_tours"))
 
-        return render_template("edit_tour.html", tour=tour)
+        return render_template("edit_tour.html", tour=tour_instance)
 
 
 @tour_blueprint.get("/reserve/<int:id>/")
 def reserve(id):
     with Session() as session:
-        tour = session.query(Tour).filter_by(id=id).first()
-        tour.is_reserved = True
-        session.commit()
-        return render_template("reserved.html", tour=tour)
+        tour_instance = session.query(Tour).filter_by(id=id).first()
+        if tour_instance:
+            tour_instance.is_reserved = True
+            session.commit()
+        return render_template("reserved.html", tour=tour_instance)

@@ -4,15 +4,15 @@
 <form action="{{ url_for('tours.add_tour') }}" method="post" enctype="multipart/form-data">
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">маршрут туру</label>
-        <input type="number" class="form-control" name="tour itinerary">
+        <input type="text" class="form-control" name="itinerary">
     </div>
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">тривалість</label>
-        <input type="number" class="form-control" name="duration">
+        <input type="text" class="form-control" name="duration">
     </div>
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">ціна за тур</label>
-        <input type="number" class="form-control" name="price">
+        <input type="text" class="form-control" name="price">
     </div>
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">виберіть зображення туру</label>
